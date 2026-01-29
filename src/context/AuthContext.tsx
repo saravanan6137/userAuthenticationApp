@@ -79,7 +79,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const foundUser = users.find(
         u =>
           u.email.toLowerCase() === normalizedEmail &&
-          verifyPassword(password, u.password), // Verify hashed password
+          verifyPassword(password.trim(), u.password), // Verify hashed password
       );
 
       if (!foundUser) {
@@ -124,7 +124,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         id: Date.now().toString(),
         name: name.trim(),
         email: normalizedEmail,
-        password: hashPassword(password), // Hash the password
+        password: hashPassword(password.trim()), // Hash the password
       };
 
       // Save to users database
