@@ -60,38 +60,198 @@ yarn ios
 
 If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+---
 
-## Step 3: Modify your app
+# About This App
 
-Now that you have successfully run the app, let's make changes!
+## Overview
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+This is a **User Authentication Application** that demonstrates a complete authentication system built with modern React Native practices. It features secure user registration, login, profile management, and local storage persistence.
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+## 📱 Screenshots
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+### Main Screens
+<p align="center">
+  <img src="./demo/Login.png" width="250" alt="Login Screen"/>
+  <img src="./demo/signup.png" width="250" alt="Signup Screen"/>
+  <img src="./demo/home.png" width="250" alt="Home Screen"/>
+</p>
 
-## Congratulations! :tada:
+### Authentication Success
+<p align="center">
+  <img src="./demo/LoginSuccess.png" width="250" alt="Login Success"/>
+  <img src="./demo/signupSuccess.png" width="250" alt="Signup Success"/>
+</p>
 
-You've successfully run and modified your React Native App. :partying_face:
+### Error Handling
+<p align="center">
+  <img src="./demo/LoginError.png" width="250" alt="Login Error"/>
+  <img src="./demo/signupError.png" width="250" alt="Signup Validation Error"/>
+  <img src="./demo/signupDuplicateUser.png" width="250" alt="Duplicate User Error"/>
+</p>
 
-### Now what?
+## Features
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+### Core Functionality
+- **User Registration** - Create new accounts with email, password, and name
+- **User Login** - Secure authentication with email and password
+- **Profile Management** - View and manage user profile information
+- **Session Persistence** - Automatic login on app restart
+- **Secure Logout** - Clear session and return to login screen
 
-# Troubleshooting
+### Security
+- **Password Hashing** - SHA-256 encryption for password storage
+- **Input Validation** - Real-time form validation with custom rules
+- **Duplicate Prevention** - Email uniqueness checking
+- **Data Sanitization** - Automatic email normalization and input trimming
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+### User Experience
+- **Clean UI** - Modern, minimalist design with consistent styling
+- **Error Handling** - Comprehensive error messages and boundary components
+- **Loading States** - Visual feedback during async operations
+- **Form Validation** - Real-time validation with helpful error messages
+- **Navigation** - Smooth transitions between screens
 
-# Learn More
+## Architecture
 
-To learn more about React Native, take a look at the following resources:
+### Tech Stack
+- **Framework**: React Native 0.83.1
+- **Language**: TypeScript 5.8.3
+- **Navigation**: React Navigation (Native Stack)
+- **Storage**: AsyncStorage
+- **Crypto**: CryptoJS (SHA-256)
+- **Testing**: Jest + React Test Renderer
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+### Project Structure
+
+```
+UserAuthenticationApp/
+├── src/
+│   ├── components/          # Reusable UI components
+│   │   ├── AuthScreenLayout.tsx    # Layout wrapper for auth screens
+│   │   ├── Button.tsx              # Custom button component
+│   │   ├── Card.tsx                # Card container component
+│   │   ├── ErrorBoundary.tsx       # Error handling wrapper
+│   │   ├── FormFields.tsx          # Dynamic form field renderer
+│   │   ├── Icon.tsx                # Icon component with emoji support
+│   │   ├── Input.tsx               # Text input with validation
+│   │   ├── ProfileCard.tsx         # User profile display card
+│   │   └── ProfileInfoRow.tsx      # Profile information row
+│   │
+│   ├── screens/             # App screens
+│   │   ├── LoginScreen.tsx         # User login screen
+│   │   ├── SignupScreen.tsx        # User registration screen
+│   │   └── HomeScreen.tsx          # User profile/home screen
+│   │
+│   ├── context/             # React Context for state management
+│   │   └── AuthContext.tsx         # Authentication state & operations
+│   │
+│   ├── hooks/               # Custom React hooks
+│   │   ├── useAuth.ts              # Authentication hook
+│   │   └── useForm.ts              # Form management hook
+│   │
+│   ├── navigation/          # Navigation configuration
+│   │   └── AppNavigator.tsx        # Main navigation stack
+│   │
+│   ├── utils/               # Utility functions
+│   │   └── crypto.ts               # Password hashing utilities
+│   │
+│   ├── config/              # App configuration
+│   │   └── formConfig.ts           # Form field configurations
+│   │
+│   ├── constants/           # App constants
+│   │   └── colors.ts               # Color palette
+│   │
+│   └── types/               # TypeScript type definitions
+│       └── auth.ts                 # Authentication types
+│
+├── __tests__/               # Unit tests
+│   ├── App.test.tsx
+│   ├── crypto.test.ts
+│   ├── signup.test.ts
+│   └── validation.test.ts
+│
+├── android/                 # Android native code
+├── ios/                     # iOS native code
+└── App.tsx                  # Root component
+```
+
+### Design Patterns
+
+#### Context + Hooks Pattern
+- **AuthContext**: Centralized authentication state management
+- **useAuth Hook**: Simplified access to auth operations
+- **useForm Hook**: Reusable form state and validation logic
+
+#### Component Composition
+- Small, focused components with single responsibilities
+- Layout components for consistent screen structure
+- Compound components for complex UI patterns
+
+#### Configuration-Driven Forms
+- Declarative form field definitions
+- Automatic form generation from config
+- Centralized validation rules
+
+## Authentication Flow
+
+```
+1. App Launch
+   └─> Check AsyncStorage for session
+       ├─> User found → Navigate to Home
+       └─> No user → Navigate to Login
+
+2. Sign Up
+   └─> User fills form
+       └─> Validate inputs
+           └─> Check email uniqueness
+               └─> Hash password (SHA-256)
+                   └─> Store in AsyncStorage
+                       └─> Create session → Navigate to Home
+
+3. Login
+   └─> User enters credentials
+       └─> Fetch users from AsyncStorage
+           └─> Find user by email
+               └─> Verify password hash
+                   └─> Create session → Navigate to Home
+
+4. Logout
+   └─> Clear current session
+       └─> Navigate to Login
+```
+
+## Testing
+
+The app includes comprehensive unit tests covering:
+
+- **Authentication Logic** - Login, signup, and logout flows
+- **Password Security** - Hashing and verification
+- **Form Validation** - Input validation rules
+- **Data Persistence** - AsyncStorage operations
+- **Edge Cases** - Duplicate emails, invalid inputs, etc.
+
+Run tests with:
+```bash
+npm test
+```
+
+## UI Components
+
+### Reusable Components
+- **Input**: Text input with validation and error display
+- **Button**: Customizable button with loading states
+- **Card**: Container component for grouped content
+- **Icon**: Emoji-based icon component
+- **FormFields**: Dynamic form generator
+- **AuthScreenLayout**: Consistent layout for auth screens
+- **ErrorBoundary**: Error catching and display
+
+## Security Features
+
+1. **Password Hashing**: All passwords are hashed using SHA-256 before storage
+2. **No Plain Text Storage**: Passwords are never stored in plain text
+3. **Session Management**: Secure session handling with AsyncStorage
+4. **Input Sanitization**: Email normalization and whitespace trimming
+5. **Validation**: Client-side validation for all user inputs
+
